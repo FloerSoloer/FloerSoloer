@@ -7,5 +7,10 @@ import Event from "Bot/Event";
  */
 export default new Event(async (bot, interaction: Interaction) => {
   if (interaction.isCommand())
-    return bot.executeCommand(interaction).catch((err) => bot.logger.error(err));
+    return bot.executeCommand(interaction).catch(async (err) => {
+      if (!(err instanceof Error)) throw err;
+      return interaction.replied
+        ? interaction.editReply(err.message)
+        : interaction.reply(err.message);
+    });
 });

@@ -24,7 +24,7 @@ export default class Bot extends Client<true> {
 
     this.#commands = commands;
     for (const [name, { listener, on_or_once }] of Object.entries(events))
-      this[on_or_once](name, (...args) => listener(this, ...args));
+      this[on_or_once](name, (...args) => listener(this, ...args).catch(this.logger.error));
 
     this.login();
   }
