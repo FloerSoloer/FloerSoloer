@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "extends": [
+    "@react-native-community",
+    "plugin:import/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "groups": [["builtin", "external"], "type", ["internal", "parent"], ["sibling", "index"]],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "no-console": "warn",
+    "react/react-in-jsx-scope": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:import/typescript"],
+      "parserOptions": { "project": "./tsconfig.json" },
+      "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        }
+      }
+    }
+  ]
+}
